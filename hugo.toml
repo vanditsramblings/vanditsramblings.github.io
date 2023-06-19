@@ -3,6 +3,7 @@ languageCode = "en-us"
 defaultContentLanguage = "en"
 title = "Vandit Sharma"
 theme = "hermit"
+publishDir = "docs"
 # enableGitInfo = true
 pygmentsCodefences  = true
 pygmentsUseClasses  = true
