@@ -1,0 +1,40 @@
+baseURL = 'https://vanditsramblings.github.io/'
+languageCode = 'en-us'
+title = 'Vandit Sharma'
+theme= "m10c"
+
+author= 'Vandit Sharma'
+description= 'Portfolio/Resume'
+#avatar: Path of file containing the author avatar image
+menu_item_separator= '-'
+#favicon: Absolute path of your favicon.ico file (default: “/favicon.ico”)
+
+[menu]
+[[menu.main]]
+identifier = "home"
+name = "Home"
+url = "/"
+weight = 1
+[[menu.main]]
+identifier = "tags"
+name = "Tags"
+url = "/tags/"
+weight = 2
+[[menu.main]]
+identifier = "about"
+name = "About"
+url = "/about/"
+weight = 3
+
+[params]
+author = 'Vandit Sharma'
+description = 'Principal Software Engineer at Qualys'
+menu_item_separator ='|'
+[[params.social]]
+icon = "github"
+name = "Github"
+url = "https://github.com/vanditsramblings"
+[[params.social]]
+icon = "linkedin"
+name = "LinkedIn"
+url = "https://www.linkedin.com/in/vanditsharma003/"
