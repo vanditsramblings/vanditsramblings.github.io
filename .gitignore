@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+specs/
+.vscode/extensions.json
+.vscode/launch.json
+public/CNAME_INSTRUCTIONS.md

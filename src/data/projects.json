@@ -1,0 +1,37 @@
+[
+  {
+    "name": "USO",
+    "description": "Unified Script Orchestrator(USO) : a centralized, secure, and highly observable script management platform",
+    "url": "https://github.com/vanditsramblings/USO",
+    "stars": 20,
+    "language": "Python"
+  },
+  {
+    "name": "graphql-meter",
+    "description": "A self-hosted , all-in-one platform for GraphQL load testing, that transforms graphql schemas into configurable performance tests.",
+    "url": "https://github.com/vanditsramblings/graphql-meter",
+    "stars": 17,
+    "language": "Python"
+  },
+  {
+    "name": "everything",
+    "description": null,
+    "url": "https://github.com/vanditsramblings/everything",
+    "stars": 2,
+    "language": "Java"
+  },
+  {
+    "name": "inmem-repository",
+    "description": null,
+    "url": "https://github.com/vanditsramblings/inmem-repository",
+    "stars": 2,
+    "language": "Java"
+  },
+  {
+    "name": "kafka-file-messenger",
+    "description": "A simple sender/receiver for sending files over kafka topics",
+    "url": "https://github.com/vanditsramblings/kafka-file-messenger",
+    "stars": 2,
+    "language": "Java"
+  }
+]

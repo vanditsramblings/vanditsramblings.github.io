@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="About - Architect.Logic">
+  <!-- Header Section -->
+  <section class="w-full max-w-container-max mx-auto px-gutter pt-xl pb-lg flex flex-col md:flex-row gap-lg items-start border-b border-outline-variant">
+    <div class="w-full md:w-1/3 border border-outline p-unit">
+      <div class="w-full h-96 bg-surface-container-high flex items-center justify-center grayscale text-on-surface-variant font-code">
+        [PORTRAIT]
+      </div>
+    </div>
+    <div class="w-full md:w-2/3 flex flex-col gap-md">
+      <div>
+        <h1 class="font-display-lg text-display-lg text-on-surface mb-sm">Lead Architect.</h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+          I specialize in designing highly scalable, distributed systems. My focus is on structural integrity, reducing accidental complexity, and fostering engineering cultures that value deliberate decision-making over reactive coding.
+        </p>
+      </div>
+      <div class="flex gap-sm">
+        <a class="inline-flex items-center justify-center border border-primary bg-primary text-on-primary px-md py-sm font-label-caps text-label-caps uppercase hover:bg-transparent hover:text-primary transition-colors" href="mailto:hello@architect.logic">
+          Get in Touch
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline Section -->
+  <section class="w-full max-w-container-max mx-auto px-gutter py-lg border-b border-outline-variant">
+    <h2 class="font-headline-md text-headline-md text-on-surface mb-lg">Professional Trajectory.</h2>
+    <div class="flex flex-col">
+      <div class="flex flex-col md:flex-row border-b border-outline-variant py-md gap-md hover:bg-surface-container-low transition-colors px-sm -mx-sm">
+        <div class="w-full md:w-1/4">
+          <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">2021 — Present</span>
+        </div>
+        <div class="w-full md:w-3/4 flex flex-col gap-xs">
+          <h3 class="font-headline-md text-headline-md text-on-surface text-2xl">Principal Architect</h3>
+          <p class="font-body-md text-body-md text-on-surface-variant">Leading architectural overhaul of legacy systems into microservices.</p>
+          <div class="flex flex-wrap gap-xs mt-sm">
+            <span class="border border-outline px-2 py-1 font-label-caps text-label-caps text-on-surface uppercase">Distributed Systems</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ideals Section -->
+  <section class="w-full max-w-container-max mx-auto px-gutter py-lg border-b border-outline-variant">
+    <div class="flex flex-col md:flex-row gap-lg">
+      <div class="w-full md:w-1/3">
+        <h2 class="font-headline-md text-headline-md text-on-surface">Core Ideals.</h2>
+        <p class="font-body-md text-body-md text-on-surface-variant mt-sm">The principles that dictate structural decisions.</p>
+      </div>
+      <div class="w-full md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-md">
+        <div class="border border-outline p-md flex flex-col gap-sm">
+          <span class="material-symbols-outlined text-primary" data-icon="architecture">architecture</span>
+          <h4 class="font-headline-md text-headline-md text-xl text-on-surface">Simplicity over Complexity</h4>
+          <p class="font-body-md text-body-md text-on-surface-variant">Systems should be as simple as possible, but no simpler.</p>
+        </div>
+        <div class="border border-outline p-md flex flex-col gap-sm">
+          <span class="material-symbols-outlined text-primary" data-icon="plumbing">plumbing</span>
+          <h4 class="font-headline-md text-headline-md text-xl text-on-surface">Boring Technology</h4>
+          <p class="font-body-md text-body-md text-on-surface-variant">Prefer mature, battle-tested tools over the latest trends.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

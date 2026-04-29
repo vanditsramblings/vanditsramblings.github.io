@@ -1,0 +1,32 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog');
+  return blogEntries.map(entry => ({
+    params: { slug: entry.id }, props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<BaseLayout title={`${entry.data.title} - Architect.Logic`}>
+  <article class="w-full max-w-[720px] mx-auto px-gutter py-xl">
+    <header class="border-b border-outline-variant pb-md mb-lg">
+      <div class="flex gap-4 font-label-caps text-label-caps text-on-surface-variant uppercase mb-sm">
+        <time>{new Date(entry.data.publishDate).toLocaleDateString()}</time>
+        {entry.data.readTime && <span> • {entry.data.readTime} MIN READ</span>}
+      </div>
+      <h1 class="font-headline-xl text-headline-xl text-on-background mb-md">{entry.data.title}</h1>
+      <div class="flex gap-2">
+        {entry.data.tags.map((tag: string) => <span class="font-code text-code border border-outline px-2 py-1 text-on-surface">{tag}</span>)}
+      </div>
+    </header>
+    
+    <div class="prose prose-neutral dark:prose-invert font-body-lg text-body-lg text-on-surface-variant leading-relaxed max-w-none">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

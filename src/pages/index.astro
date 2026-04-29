@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+
+let projects = [];
+try {
+  const dataPath = path.resolve('./src/data/projects.json');
+  if (fs.existsSync(dataPath)) {
+    projects = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
+  }
+} catch(e) {
+  console.error("Could not load projects", e);
+}
+---
+<BaseLayout title="Architect Monochrome - Minimal Editorial Dashboard">
+  <div class="flex-grow w-full max-w-[1440px] mx-auto px-gutter md:px-12 py-lg flex flex-col gap-xl">
+    
+    <!-- Hero Section -->
+    <section class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-end border-b border-outline-variant pb-xl w-full">
+      <div class="col-span-1 md:col-span-8 flex flex-col gap-md">
+        <span class="font-label-caps text-label-caps text-on-surface-variant uppercase">SYSTEM ARCHITECT</span>
+        <h1 class="font-display-lg text-display-lg text-on-background">Minimal Editorial Dashboard.</h1>
+      </div>
+      <div class="col-span-1 md:col-span-4 flex flex-col gap-sm md:text-right">
+        <p class="font-body-lg text-body-lg text-on-surface-variant">
+          A very clean, typography-focused variation of the dashboard. Instead of boxes, use typographic spacing and subtle dividers to create the "card" feel. Focus on extreme legibility and editorial precision.
+        </p>
+      </div>
+    </section>
+
+    <!-- Asymmetrical Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-x-gutter gap-y-xl w-full">
+      
+      <!-- Column 1: Writing (Narrow) -->
+      <section class="col-span-1 md:col-span-4 flex flex-col gap-md border-r border-outline-variant pr-gutter">
+        <div class="flex items-center justify-between border-b border-outline-variant pb-xs">
+          <h2 class="font-label-caps text-label-caps text-on-background uppercase">WRITING</h2>
+          <span class="material-symbols-outlined text-on-surface-variant" data-icon="article">article</span>
+        </div>
+        
+        {sortedPosts.map(post => (
+          <a href={`/blog/${post.id}`} class="block flex flex-col gap-xs group cursor-pointer border-b border-outline-variant pb-md">
+            <span class="font-label-caps text-label-caps text-on-surface-variant uppercase">{new Date(post.data.publishDate).toLocaleDateString()}</span>
+            <h3 class="font-headline-md text-headline-md text-on-background group-hover:underline underline-offset-4 decoration-1">{post.data.title}</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">
+              {post.data.description}
+            </p>
+          </a>
+        ))}
+      </section>
+
+      <!-- Column 2: Projects (Wide) -->
+      <section class="col-span-1 md:col-span-8 flex flex-col gap-md pl-0 md:pl-gutter">
+        <div class="flex items-center justify-between border-b border-outline-variant pb-xs">
+          <h2 class="font-label-caps text-label-caps text-on-background uppercase">PROJECTS</h2>
+          <span class="material-symbols-outlined text-on-surface-variant" data-icon="architecture">architecture</span>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+          {projects.map(project => (
+            <div class="flex flex-col gap-sm">
+              <div class="aspect-[4/3] bg-surface-container-high w-full relative group overflow-hidden flex items-center justify-center p-8 text-center text-on-surface-variant font-code text-sm">
+                [PROJECT REPO] <br/> {project.name}
+              </div>
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-headline-md text-headline-md text-on-background"><a href={project.url} target="_blank" class="hover:underline">{project.name}</a></h3>
+                  <p class="font-body-md text-body-md text-on-surface-variant">{project.description || 'GitHub Project'}</p>
+                </div>
+                <span class="font-label-caps text-label-caps border border-outline px-2 py-1">⭐ {project.stars}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+      
+    </div>
+  </div>
+</BaseLayout>
