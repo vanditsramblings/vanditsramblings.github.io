@@ -1,43 +1,42 @@
-# Astro Starter Kit: Minimal
+# Vandit's Ramblings
 
-```sh
-npm create astro@latest -- --template minimal
-```
+## About Me
+**Lead Architect.**
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+I specialize in designing highly scalable, distributed systems. My focus is on structural integrity, reducing accidental complexity, and fostering engineering cultures that value deliberate decision-making without compromising on reactive coding.
 
-## 🚀 Project Structure
+## Core Ideals
 
-Inside of your Astro project, you'll see the following folders and files:
+* **Simple Complexity:** 
+* **Boring for Old Dumb For New:** 
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+---
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Developer Guide
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+### How to use this
+This repository contains the source code for my personal blog and portfolio, built using [Astro](https://astro.build/).
+To run the project locally:
+1. Clone the repository.
+2. Install dependencies with `npm install`.
+3. Start the development server with `npm run dev`.
+4. Open `localhost:4321` in your browser.
 
-Any static assets, like images, can be placed in the `public/` directory.
+### How to update pages
+* **Main Pages**: The main pages of the site (like the home page or this about page) are located in `src/pages/`. They are `.astro` files.
+* **Components**: Shared UI components are in `src/components/`.
+* **Styling**: Global styles and design tokens are in `src/styles/global.css`.
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+### How to add new blogs
+1. Navigate to the `src/content/blog/` directory.
+2. Create a new markdown (`.md`) file. The file name should preferably follow the `YYYY-MM-DD-slug.md` format.
+3. Add the frontmatter at the top of the file:
+   ```markdown
+   ---
+   title: "Your Blog Post Title"
+   description: "A brief summary of the post"
+   pubDate: 2026-04-29
+   ---
+   ```
+4. Write your blog content below the frontmatter using standard Markdown.
+5. The blog will automatically be available on the site under the `/blog` route.
