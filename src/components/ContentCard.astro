@@ -1,0 +1,59 @@
+---
+const { title, description, url, tags = [], date } = Astro.props;
+---
+<a href={url} class="card-link">
+  <article class="card">
+    <div class="card-content">
+      {date && <time class="card-date">{new Date(date).toLocaleDateString()}</time>}
+      <h3 class="card-title">{title}</h3>
+      <p class="card-desc">{description}</p>
+      {tags.length > 0 && (
+        <div class="card-tags">
+          {tags.map((tag: string) => <span class="tag">{tag}</span>)}
+        </div>
+      )}
+    </div>
+  </article>
+</a>
+
+<style>
+  .card-link {
+    display: block;
+  }
+  .card {
+    padding: calc(var(--base-unit) * 6);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    height: 100%;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0 var(--border);
+  }
+  .card-date {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: calc(var(--base-unit) * 2);
+    display: block;
+  }
+  .card-title {
+    margin: 0 0 calc(var(--base-unit) * 2) 0;
+    font-size: 1.5rem;
+  }
+  .card-desc {
+    margin: 0 0 calc(var(--base-unit) * 4) 0;
+    color: var(--text-secondary);
+  }
+  .card-tags {
+    display: flex;
+    gap: calc(var(--base-unit) * 2);
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: calc(var(--base-unit) * 1) calc(var(--base-unit) * 2);
+    border: 1px solid var(--border);
+    background-color: var(--surface-primary);
+  }
+</style>

@@ -1,0 +1,75 @@
+---
+import '../styles/global.css';
+const { title = "Architect Monochrome Blog" } = Astro.props;
+---
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>{title}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Newsreader:wght@400&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col font-body-md antialiased">
+  
+  <!-- TopNavBar -->
+  <nav class="bg-white dark:bg-black docked full-width top-0 border-b border-b border-neutral-200 dark:border-neutral-800 flat no shadows duration-200 ease-in-out z-50 sticky">
+    <div class="flex justify-between items-center max-w-7xl mx-auto w-full px-8 h-20">
+      <a href="/" class="text-2xl font-bold tracking-tighter uppercase text-neutral-900 dark:text-neutral-50 hover:opacity-80">
+        Architect.Logic
+      </a>
+      <div class="hidden md:flex gap-6 items-center">
+        <a class="font-serif text-sm uppercase tracking-widest text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors hover:bg-neutral-50 dark:hover:bg-neutral-900 px-2 py-1" href="/">Articles</a>
+        <a class="font-serif text-sm uppercase tracking-widest text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors hover:bg-neutral-50 dark:hover:bg-neutral-900 px-2 py-1" href="/about">About</a>
+      </div>
+      <div class="flex gap-4 items-center">
+        <button id="theme-toggle" class="text-neutral-900 dark:text-neutral-50 hover:bg-neutral-50 dark:hover:bg-neutral-900 p-2 duration-200">
+          <span class="material-symbols-outlined" data-icon="contrast">contrast</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content Canvas -->
+  <main class="flex-grow flex flex-col items-center w-full pb-xl">
+    <slot />
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white dark:bg-black docked full-width bottom-0 border-t border-t border-neutral-200 dark:border-neutral-800 flat no shadows duration-200 mt-auto">
+    <div class="max-w-7xl mx-auto w-full px-8 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="font-serif text-xs uppercase tracking-widest text-neutral-900 dark:text-neutral-50">
+        © 2024 ARCHITECT.LOGIC — BUILT FOR PRECISION
+      </div>
+      <div class="flex gap-6">
+        <a class="font-serif text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" href="#">GitHub</a>
+        <a class="font-serif text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors" href="#">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('theme-toggle');
+    const setTheme = (theme) => {
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+      }
+      localStorage.setItem('theme', theme);
+    };
+    
+    // Set initial theme
+    const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    setTheme(savedTheme);
+    
+    toggleBtn?.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      setTheme(isDark ? 'light' : 'dark');
+    });
+  </script>
+</body>
+</html>

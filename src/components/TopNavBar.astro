@@ -1,0 +1,42 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+---
+<header class="top-nav">
+  <div class="nav-container">
+    <a href="/" class="brand">Vandit's Ramblings</a>
+    <nav class="nav-links">
+      <a href="/about">About</a>
+      <ThemeToggle />
+    </nav>
+  </div>
+</header>
+
+<style>
+  .top-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--surface-primary);
+    border-bottom: 1px solid var(--border);
+    padding: calc(var(--base-unit) * 4) 0;
+  }
+  .nav-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 calc(var(--base-unit) * 4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .brand {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  .nav-links {
+    display: flex;
+    gap: calc(var(--base-unit) * 6);
+    align-items: center;
+    font-family: var(--font-mono);
+  }
+</style>

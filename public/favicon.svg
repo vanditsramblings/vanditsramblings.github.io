@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+    <style>
+        .bg { fill: #111111; }
+        .fg { fill: #FFFFFF; }
+        @media (prefers-color-scheme: dark) {
+            .bg { fill: #F5F5F5; }
+            .fg { fill: #111111; }
+        }
+    </style>
+    <!-- Circular background -->
+    <circle cx="64" cy="64" r="64" class="bg" />
+    
+    <!-- Stylized Bespoke 'V' -->
+    <path d="M 28 32 L 56 32 L 68 76 L 82 32 L 96 32 L 73 98 L 55 98 Z" class="fg" />
+</svg>
