@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 ---
-<BaseLayout title={`${entry.data.title} - Architect.Logic`}>
+<BaseLayout title={`${entry.data.title} - Dumb Discoveries`}>
   <article class="w-full max-w-[720px] mx-auto px-gutter py-xl">
     <header class="border-b border-outline-variant pb-md mb-lg">
       <div class="flex gap-4 font-label-caps text-label-caps text-on-surface-variant uppercase mb-sm">
