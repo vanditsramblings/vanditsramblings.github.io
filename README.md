@@ -1,4 +1,4 @@
-# Vandit's Ramblings
+# SENIOR INTERN
 
 ## About Me
 **Lead Architect.**
@@ -7,8 +7,9 @@ I specialize in designing highly scalable, distributed systems. My focus is on s
 
 ## Core Ideals
 
-* **Simple Complexity:** 
-* **Boring for Old Dumb For New:** 
+* **Simple Complexity** 
+* **Balancing fail fast ideology with core stability**
+* **Never shy in getting hands dirty**
 
 ---
 

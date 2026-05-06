@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  blog:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: senior-intern-blog:latest
+    container_name: senior-intern-blog
+    restart: always
+    ports:
+      - "80:80"
