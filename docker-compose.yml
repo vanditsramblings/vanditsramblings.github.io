@@ -1,12 +1,74 @@
 version: '3.8'
 
+# Phase 2 — Production: Ghost + MySQL + Cloudflare Tunnel
+# Copy .env.example → .env and fill in all values before running.
+# Usage: docker compose up -d
+#
+# Cloudflare Zero Trust setup:
+#   1. Networks > Tunnels > Create a tunnel (type: Cloudflared)
+#   2. Name it (e.g. "senior-intern-blog"), save the token → CLOUDFLARE_TUNNEL_TOKEN
+#   3. Add a Public Hostname: blog.yourdomain.com → http://ghost:2368
+#
+# Ghost finishes setup at https://blog.yourdomain.com/ghost
+
 services:
-  blog:
-    build: 
-      context: .
-      dockerfile: Dockerfile
-    image: senior-intern-blog:latest
-    container_name: senior-intern-blog
-    restart: always
-    ports:
-      - "80:80"
+  ghost:
+    image: ghost:5-alpine
+    container_name: ghost
+    restart: unless-stopped
+    expose:
+      - "2368"
+    environment:
+      database__client: mysql
+      database__connection__host: db
+      database__connection__user: ${MYSQL_USER}
+      database__connection__password: ${MYSQL_PASSWORD}
+      database__connection__database: ${MYSQL_DATABASE}
+      url: ${GHOST_URL}
+      NODE_ENV: production
+      mail__transport: ${MAIL_TRANSPORT:-Direct}
+      mail__from: ${MAIL_FROM:-noreply@example.com}
+      mail__options__host: ${MAIL_HOST:-}
+      mail__options__port: ${MAIL_PORT:-587}
+      mail__options__auth__user: ${MAIL_USER:-}
+      mail__options__auth__pass: ${MAIL_PASS:-}
+    volumes:
+      - ghost_content:/var/lib/ghost/content
+      - ./ghost-theme/senior-intern:/var/lib/ghost/content/themes/senior-intern
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8.0
+    container_name: ghost-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    volumes:
+      - ghost_db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "--silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    # The TUNNEL_TOKEN env var is picked up automatically by cloudflared.
+    # Routing rules (which service to proxy) are configured in the Cloudflare dashboard.
+    command: tunnel --no-autoupdate run
+    environment:
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN}
+    depends_on:
+      - ghost
+
+volumes:
+  ghost_content:
+  ghost_db:

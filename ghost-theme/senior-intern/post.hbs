@@ -1,0 +1,21 @@
+{{!< default}}
+
+{{#post}}
+<article class="article">
+  <header class="article-header">
+    <div class="eyebrow">ARTICLE</div>
+    <h1>{{title}}</h1>
+    <p class="article-meta">
+      <time>{{date published_at format="MMM DD, YYYY"}}</time>
+      {{#if tags}}
+        <span>·</span>
+        <span>{{tags separator=", "}}</span>
+      {{/if}}
+    </p>
+  </header>
+
+  <div class="article-content">
+    {{content}}
+  </div>
+</article>
+{{/post}}

@@ -1,0 +1,49 @@
+version: '3.8'
+
+# Phase 1 — Local development sandbox
+# Usage: docker compose -f docker-compose.local.yml up
+# Ghost admin: http://localhost:2368/ghost
+
+services:
+  ghost:
+    image: ghost:5-alpine
+    container_name: ghost-local
+    restart: unless-stopped
+    ports:
+      - "2368:2368"
+    environment:
+      database__client: mysql
+      database__connection__host: db
+      database__connection__user: ghost
+      database__connection__password: ghostlocal
+      database__connection__database: ghost
+      url: http://localhost:2368
+      NODE_ENV: development
+    volumes:
+      - ghost_local_content:/var/lib/ghost/content
+      - ./ghost-theme/senior-intern:/var/lib/ghost/content/themes/senior-intern
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8.0
+    container_name: ghost-local-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootlocal
+      MYSQL_USER: ghost
+      MYSQL_PASSWORD: ghostlocal
+      MYSQL_DATABASE: ghost
+    volumes:
+      - ghost_local_db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "--silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  ghost_local_content:
+  ghost_local_db:

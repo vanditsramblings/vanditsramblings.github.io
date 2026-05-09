@@ -1,0 +1,9 @@
+{
+  "name": "senior-intern",
+  "version": "1.0.0",
+  "description": "Ghost theme for Senior Intern.",
+  "engines": {
+    "ghost": ">=5.0.0"
+  },
+  "license": "MIT"
+}

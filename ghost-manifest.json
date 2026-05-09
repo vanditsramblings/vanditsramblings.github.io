@@ -1,0 +1,30 @@
+{
+  "site": {
+    "title": "Senior Intern",
+    "description": "The duality of an experienced engineer who remains a perpetual learner.",
+    "theme": "senior-intern",
+    "navigation": [
+      {
+        "label": "Home",
+        "url": "/"
+      },
+      {
+        "label": "About",
+        "url": "/about/"
+      },
+      {
+        "label": "Projects",
+        "url": "/projects/"
+      }
+    ],
+    "secondary_navigation": [
+      {
+        "label": "Ghost",
+        "url": "https://ghost.org"
+      }
+    ]
+  },
+  "design": {
+    "brand_color": "#15171A"
+  }
+}

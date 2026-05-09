@@ -1,0 +1,42 @@
+{{!< default}}
+
+<section class="hero">
+  <div class="eyebrow">THE</div>
+  <div class="hero-grid">
+    <div>
+      <h1 class="hero-title">Senior Intern</h1>
+    </div>
+    <div class="hero-copy">
+      <p>An experienced engineer who still needs to be an intern in learning and discovering new things.</p>
+    </div>
+  </div>
+</section>
+
+<section class="split-grid">
+  <section class="panel panel-writing">
+    <div class="panel-head">
+      <h2>Writing</h2>
+      <span>Articles</span>
+    </div>
+
+    {{#get "posts" limit="6" include="authors,tags" order="published_at desc"}}
+      <div class="post-list">
+        {{#foreach posts}}
+          <a class="post-card" href="{{url}}">
+            <time>{{date published_at format="MMM DD, YYYY"}}</time>
+            <h3>{{title}}</h3>
+            <p>{{excerpt words="24"}}</p>
+          </a>
+        {{/foreach}}
+      </div>
+    {{/get}}
+  </section>
+
+  <section class="panel panel-projects">
+    <div class="panel-head">
+      <h2>Projects</h2>
+      <span>Selected work</span>
+    </div>
+    {{> "projects"}}
+  </section>
+</section>
