@@ -1,26 +1,28 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cd "$(dirname "$0")/.."
+# Get the root directory of the repository
+ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+cd "${ROOT_DIR}"
 
-CONTAINER_NAME="ghost-local"
-CONTENT_VOLUME="ghost_local_content"
-HOST_PORT="2368"
-GHOST_IMAGE="ghost:5-alpine"
-GHOST_URL="http://localhost:${HOST_PORT}"
-THEME_DIR="$(pwd)/ghost-theme/senior-intern"
+echo "Cleaning up any existing Ghost local services..."
+docker compose -f docker-compose.local.yml down --remove-orphans
 
-# Remove any stale container from a previous run.
-docker rm -f "${CONTAINER_NAME}" >/dev/null 2>&1 || true
+echo "Bootstrapping Ghost local services (Ghost + MySQL)..."
+echo "Ghost will be available at http://localhost:2368"
+echo "Ghost Admin: http://localhost:2368/ghost"
 
-# Ghost runs with SQLite by default when no MySQL environment variables are set.
-# The content volume keeps themes, images, and the local database files between runs.
-exec docker run -it --rm \
-  --name "${CONTAINER_NAME}" \
-  -p "${HOST_PORT}:2368" \
-  -e "url=${GHOST_URL}" \
-  -e "NODE_ENV=development" \
-  -e "database__client=sqlite3" \
-  -v "${CONTENT_VOLUME}:/var/lib/ghost/content" \
-  -v "${THEME_DIR}:/var/lib/ghost/content/themes/senior-intern" \
-  "${GHOST_IMAGE}"
+# Load local environment variables if present
+if [ -f .env.local ]; then
+  export $(grep -v '^#' .env.local | xargs)
+fi
+
+# Start services in the background
+docker compose -f docker-compose.local.yml up -d
+
+# Run the provisioning script to handle setup and theme activation
+python3 scripts/run_ghost_local.py
+
+echo "Services are ready. Following logs (Ctrl+C to stop, containers will remain running)..."
+docker compose -f docker-compose.local.yml logs -f
+

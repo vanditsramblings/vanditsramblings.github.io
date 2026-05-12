@@ -37,6 +37,7 @@ services:
       MYSQL_DATABASE: ghost
     volumes:
       - ghost_local_db:/var/lib/mysql
+      - ./init-db:/docker-entrypoint-initdb.d
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "--silent"]
       interval: 10s

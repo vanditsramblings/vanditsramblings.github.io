@@ -5,9 +5,14 @@ This repository now runs a self-hosted Ghost blog. Keep this guide as the first-
 ## 1. Initial Setup
 
 ### Local first boot
-1. Start the local stack:
+1. Start the local stack using the helper script:
    ```bash
-   docker compose -f docker-compose.local.yml up -d
+   bash scripts/run_ghost_local.sh
+   ```
+   *Note: This script automatically handles cleanup and ensures a fresh environment.*
+2. To stop the local stack:
+   ```bash
+   bash scripts/stop_ghost_local.sh
    ```
 2. Open Ghost admin at `http://localhost:2368/ghost`.
 3. Finish the Ghost setup wizard:
@@ -166,9 +171,11 @@ Use the local stack when you want to test content, theme changes, or email setti
 ## 9. Useful Commands
 
 ```bash
-# Local Ghost with MySQL
+# Start local Ghost with MySQL
+bash scripts/run_ghost_local.sh
 
-docker compose -f docker-compose.local.yml up -d
+# Stop local Ghost
+bash scripts/stop_ghost_local.sh
 
 # Production Ghost stack
 
